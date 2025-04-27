@@ -10,6 +10,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="logoo.png">
     <style>
+    .lazy-load {
+            opacity: 0;
+            transition: opacity 60s ease-in;
+        }
         :root {
             --primary-color: #4CAF50;
             --secondary-color: #2E7D32;
@@ -356,10 +360,7 @@
         }
 
         /* Add this at the beginning of your style section */
-        .lazy-load {
-            opacity: 0;
-            transition: opacity 0.3s ease-in;
-        }
+        
     </style>
 </head>
 <body>
@@ -371,32 +372,31 @@
         <nav class="sidebar" role="navigation" aria-label="Main Navigation">
             <div class="sidebar-header">
                 
-                <h2>${user.firstName} ${user.lastName}</h2>
+                <h2>${first_Name} ${last_Name}</h2>
                 <p>Client</p>
             </div>
             <ul class="sidebar-menu">
                 <li><a href="dashboard" class="active" role="menuitem"><i class="fas fa-home"></i> Dashboard</a></li>
-                <li><a href="profile" role="menuitem"><i class="fas fa-user"></i> Profile</a></li>
-                <li><a href="meal-plans" role="menuitem"><i class="fas fa-utensils"></i> Meal Plans</a></li>
-                <li><a href="progress" role="menuitem"><i class="fas fa-chart-line"></i> Progress</a></li>
-                <li><a href="messages" role="menuitem"><i class="fas fa-comments"></i> Messages <span class="notification-badge">3</span></a></li>
-                <li><a href="appointments" role="menuitem"><i class="fas fa-calendar"></i> Appointments</a></li>
-                <li><a href="settings" role="menuitem"><i class="fas fa-cog"></i> Settings</a></li>
-                <li><a href="logout" role="menuitem"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
-            </ul>
+               
+                <li><a href="meal-plans" ><i class="fas fa-utensils"></i> Meal Plans</a></li>
+                <li><a href="progress"><i class="fas fa-chart-line"></i> Progress</a></li>
+                <li><a href="appointments.jsp"><i class="fas fa-calendar"></i> Appointments</a></li>
+                 </ul>
         </nav>
 
         <main class="main-content" role="main">
             <div class="dashboard-header">
                 <div class="welcome-message">
-                    <h1>Welcome back, ${user.firstName}!</h1>
+                    <h1>Welcome back, ${first_Name}!</h1>
                     <p>Here's your nutrition dashboard</p>
                 </div>
                 <div class="user-actions">
-                    <button class="btn btn-primary" role="button" aria-label="Schedule New Appointment">
-                        <i class="fas fa-plus"></i> New Appointment
-                    </button>
-                </div>
+    <button class="btn btn-primary" role="button" aria-label="Schedule New Appointment" onclick="window.location.href='appointments.jsp'">
+        <i class="fas fa-plus"></i> New Appointment
+    </button>
+</div>
+                
+
             </div>
 
             <div class="dashboard-grid">
@@ -406,10 +406,9 @@
                         <i class="fas fa-user"></i>
                     </div>
                     <div class="profile-info">
-                        <div class="info-item"><div class="info-label">Age</div><div class="info-value">${user.age}</div></div>
-                        <div class="info-item"><div class="info-label">Height</div><div class="info-value">${user.height} cm</div></div>
-                        <div class="info-item"><div class="info-label">Weight</div><div class="info-value">${user.weight} kg</div></div>
-                        <div class="info-item"><div class="info-label">BMI</div><div class="info-value"><fmt:formatNumber value="${user.bmi}" maxFractionDigits="1"/></div></div>
+                        <div class="info-item"><div class="info-label">Age</div><div class="info-value">${age}</div></div>
+                        <div class="info-item"><div class="info-label">Height</div><div class="info-value">${height} cm</div></div>
+                        <div class="info-item"><div class="info-label">Weight</div><div class="info-value">${weight} kg</div></div>
                     </div>
                 </section>
 
@@ -424,7 +423,7 @@
                             <div class="info-value">
                                 <c:choose>
                                     <c:when test="${not empty dietitian}">
-                                        ${dietitian.firstName} ${dietitian.lastName}
+                                        ${dietitian_firstName} ${dietitian_lastName}
                                     </c:when>
                                     <c:otherwise>
                                         Not assigned
